@@ -1,15 +1,15 @@
 let arrayOne = [
-    "0","один", "два", "три", "четыре", "пять", "шесть", "семь", "восемь", "девять", "десять",
-     "одиннадцать", "двенадцать", "тринадцать", "четырнадцать", "пятнадцать", "шестнадцать", "семнадцать",
-     "восемнадцать","девятнадцать",
+    [0,"0"],[1,"один"],[2,"два"],[3,"три"],[4,"четыре"],[5,"пять"],[6,"шесть"],[7,"семь"],[8,"восемь"],[9,"девять"],[10,"десять"],
+     [11,"одиннадцать"],[12,"двенадцать"],[13,"тринадцать"],[14, "четырнадцать"],[15, "пятнадцать"],[16,"шестнадцать"],[17,"семнадцать"],
+    [18,"восемнадцать"],[19,"девятнадцать"],
 ];
 
 let arrayTwo = [
-    "двадцать", "тридцать","сорок","пятьдесят","шестьдесят","семьдесят","восемьдесят","девяносто",
+    [2,"двадцать"],[3,"тридцать"],[4,"сорок"],[5,"пятьдесят"],[6,"шестьдесят"],[7,"семьдесят"],[8,"восемьдесят"],[9,"девяносто"],
 ];
 
 let arrayThree = [
-    "сто","двести","триста","четыреста","пятьсот","шестьсот","семьсот","восемьсот","девятьсот",
+    [1,"сто"],[2,"двести"],[3,"триста"],[4,"четыреста"],[5,"пятьсот"],[6,"шестьсот"],[7,"семьсот"],[8,"восемьсот"],[9,"девятьсот"],
 ];
 
 let letterAnswer = "";
@@ -19,52 +19,34 @@ let num3;
 let num4;
 let num5;
 
-let forIt = function (array,num) {
+let forIt = function (array,test) {
     for ( let i = 0; i < array.length; i++) {
-        if ( num == i) {
-        letterAnswer = letterAnswer + array[i];
+        if ( test == array[i][0]) {
+        letterAnswer = letterAnswer + array[i][1] + " ";
         };
     };
 };
 
-let answerNumber = prompt("Введите число!");
+let answerNumber =prompt("Введите число!");
 if ( answerNumber < 0) {
     letterAnswer =letterAnswer + "минус" + " ";
 };
 
-if ( 0 <= answerNumber < 20) {
+if ( 0 <= answerNumber && answerNumber < 20) {
     forIt(arrayOne,answerNumber);
-};
-
-if (20 <= answerNumber <= 99) {
-    num1 = parseInt(String(answerNumber).charAt(0));
-    for ( let j = 0; j < arrayTwo.length; j++) {
-        if ( num1 == j) {
-            letterAnswer = letterAnswer + arrayTwo[j-2] + " ";
-        };
-    };
-    num2 = parseInt(String(answerNumber%10).charAt(0));
+    alert("Вы ввели : " + letterAnswer);
+} else if (20 <= answerNumber && answerNumber < 99) {
+    num1 = parseInt(answerNumber.charAt(0));
+    forIt(arrayTwo,num1);
+    num2 = answerNumber%10;
     forIt(arrayOne,num2);
-};
-
-if ( 100 <= answerNumber <=999) {
-    letterAnswer = "";
-    num3 = parseInt(String(answerNumber).charAt(0));
-    alert ("Выбираем " + num3);
-    for ( let a = 0; a < arrayThree.length; a++) {
-        if ( num3 == a) {
-            letterAnswer = letterAnswer + arrayThree[a-1];
-        }
-    };
+    alert("Вы ввели : " + letterAnswer);  
+} else if ( 100 <= answerNumber && answerNumber <=999) {
+    num3 = parseInt(answerNumber.charAt(0));
+    forIt(arrayThree,num3);
     num4 = parseInt(String(answerNumber%100).charAt(0));
-    alert ("Выбираем " + num4);
-    for ( let j = 0; j < arrayTwo.length; j++) {
-        if ( num4 == j) {
-            letterAnswer = letterAnswer + " " + arrayTwo[j-2] + " ";
-        };
-    }; 
+    forIt(arrayTwo,num4);
     num5 =parseInt(String(answerNumber%100).charAt(1));
-    alert ("Выбираем " + num5);
     forIt(arrayOne,num5);
+    alert("Вы ввели : " + letterAnswer);
 };
-alert("Вы ввели : " + letterAnswer);
